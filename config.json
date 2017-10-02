@@ -1,0 +1,12 @@
+{
+  "mqtt": {
+    "host": "mqtt://192.168.1.xx",
+    "port": "1883",
+    "auth": true,
+    "username": "your broker username",
+    "password": "your broker password",
+    "clientId": ""
+  },
+  "log": true,
+  "interval": 5000
+}

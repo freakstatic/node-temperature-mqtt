@@ -1,0 +1,17 @@
+{
+  "name": "node-temperature-mqtt",
+  "version": "1.0.0",
+  "description": "A temperature monitor that sends the reads using MQTT",
+  "main": "index.js",
+  "scripts": {
+  	"start": "node index.js",
+    "test": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child-process-promise": "^2.2.1",
+    "mqtt": "^2.13.0",
+    "systeminformation": "^3.30.2"
+  }
+}
