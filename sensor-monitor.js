@@ -23,7 +23,7 @@ module.exports = class SensorMonitor {
                 if (result.stdout){
                     return resolve(result.stdout.replace('\n', ''));
                 }
-            })
+            }).catch(error => reject(error));
         })
     };
 };
