@@ -1,3 +1,4 @@
 node_modules/*
 config.template.json
 config.json
+.idea
