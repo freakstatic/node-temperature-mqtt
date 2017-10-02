@@ -19,9 +19,11 @@ module.exports = class SensorMonitor {
                     reject(result.stderr);
                     return;
                 }
+                let temperatures = result.stdout.split('\n');
+                temperatures.pop();
 
                 if (result.stdout){
-                    return resolve(result.stdout.replace('\n', ''));
+                    return resolve(temperatures);
                 }
             }).catch(error => reject(error));
         })

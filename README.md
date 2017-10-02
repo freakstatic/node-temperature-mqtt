@@ -38,7 +38,7 @@ An example of `configuration.yaml` for Home Assistant
     unit_of_measurement: '  C'
 
   - platform: mqtt
-    state_topic: 'computer/temperatures/graphic-card'
+    state_topic: 'computer/temperatures/graphic-card/1'
     name: 'Graphic Card'
     unit_of_measurement: '  C'
 ```
