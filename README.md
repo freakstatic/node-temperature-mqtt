@@ -4,7 +4,7 @@ Currently only supports CPU and Nvidia graphic temperatures <br/>
 
 I'm using this to send the temperatures to the Home Assistant broker
 
-### Prerequisite
+### Prerequisites
  1 - NodeJS <br/>
  2 - Nvidia Graphic Drivers
 
