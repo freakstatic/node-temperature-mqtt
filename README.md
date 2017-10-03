@@ -4,6 +4,15 @@ Currently only supports CPU and Nvidia graphic temperatures <br/>
 
 I'm using this to send the temperatures to the Home Assistant broker
 
+### Prerequisite
+ 1 - NodeJS <br/>
+ 2 - Nvidia Graphic Drivers
+
+In Windows you probably have to add this to your PATH variable
+
+```bash
+C:\Program Files\NVIDIA Corporation\NVSMI
+```
 
 An example of `configuration.yaml` for Home Assistant
 ```bash
@@ -46,10 +55,16 @@ With some tweaks the result will be something like this :)
 
 ![alt text](https://raw.githubusercontent.com/freakstatic/node-temperature-mqtt/master/result.png)    
     
-### Usage
+### Installation
 Change the `config.json` file for your broker settings
 ```bash
 $ npm install
-$ npm start or node index.js
 ```
-    
+### Usage
+```bash
+$ npm start
+```
+or
+```bash
+$ node index.js
+```
