@@ -1,5 +1,6 @@
 'use strict';
-const exec = require('child-process-promise').exec;
+const {promisify} = require('util');
+const exec = promisify(require('child_process').exec)
 const si = require('systeminformation');
 module.exports = class SensorMonitor {
     static getProcessorTemps() {
@@ -11,22 +12,19 @@ module.exports = class SensorMonitor {
         })
     };
 
-    static getGraphicTemperatures() {
-        return new Promise((resolve, reject) => {
-            exec('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader').then((result) => {
-
-                if (result.stderr) {
-                    reject(result.stderr);
-                    return;
-                }
+    static async getGraphicTemperatures() {
+        try {
+            let result = await exec('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader');
+            if (result.stdout) {
                 let temperatures = result.stdout.split('\n');
                 temperatures.pop();
 
-                if (result.stdout){
-                    return resolve(temperatures);
-                }
-            }).catch(error => reject(error));
-        })
+                return temperatures;
+            }
+        }catch (error){
+            console.error(error);
+        }
+        throw new Error('Unable to get graphic card temperature')
     };
 };
 

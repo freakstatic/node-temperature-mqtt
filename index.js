@@ -18,9 +18,10 @@ client.on('connect', () => {
     console.log('Connected to broker on ' + config.mqtt.host + ':' + config.mqtt.port);
     let oldCpuTemperatures = [];
     let oldGraphiCardTempeatures = [];
-    let intervalCpuTemps = setInterval(() => {
-        SensorMonitor.getProcessorTemps().then((temperatures) => {
-            temperatures.forEach((temperature, index) => {
+    let intervalCpuTemps = setInterval(async () => {
+        try {
+            let cpuTemps = await SensorMonitor.getProcessorTemps();
+            cpuTemps.forEach((temperature, index) => {
                 if (oldCpuTemperatures[index] !== temperature) {
                     if (config.log) {
                         console.log('CPU Thread ' + index + ': ' + temperature)
@@ -28,28 +29,21 @@ client.on('connect', () => {
                     oldCpuTemperatures[index] = temperature;
                     client.publish('computer/temperatures/cpu/' + index, "" + temperature);
                 }
-            })
+            });
 
-        }).catch((error) => {
-            clearInterval(intervalCpuTemps);
-            console.error(error);
-        });
-
-        SensorMonitor.getGraphicTemperatures().then((temperatures) => {
-
-            temperatures.forEach((temperature, index) => {
+            let graphicTemperatures = await SensorMonitor.getGraphicTemperatures();
+            graphicTemperatures.forEach((temperature, index) => {
                 if (oldGraphiCardTempeatures[index] !== temperature) {
                     if (config.log) {
-                        console.log('Graphic card ' + index +': ' + temperature);
+                        console.log('Graphic card ' + index + ': ' + temperature);
                     }
                     client.publish('computer/temperatures/graphic-card/' + index, temperature);
                     oldGraphiCardTempeatures = temperature;
                 }
-            })
-        }).catch((error) => {
-            clearInterval(intervalCpuTemps);
+            });
+        } catch (error) {
             console.error(error);
-        });
+        }
     }, config.interval);
 });
 
