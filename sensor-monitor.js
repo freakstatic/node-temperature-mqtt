@@ -14,7 +14,9 @@ module.exports = class SensorMonitor {
 
     static async getGraphicTemperatures() {
         try {
-            let result = await exec('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader');
+            let result = await exec('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader', {
+                windowsHide: true
+            });
             if (result.stdout) {
                 let temperatures = result.stdout.split('\n');
                 temperatures.pop();
