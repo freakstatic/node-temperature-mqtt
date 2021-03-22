@@ -38,7 +38,7 @@ client.on('connect', () => {
                         console.log('Graphic card ' + index + ': ' + temperature);
                     }
                     client.publish('computer/temperatures/graphic-card/' + index, temperature);
-                    oldGraphiCardTempeatures = temperature;
+                    oldGraphiCardTempeatures[index] = temperature;
                 }
             });
         } catch (error) {
