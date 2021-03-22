@@ -22,7 +22,7 @@ client.on('connect', () => {
         try {
             let cpuTemps = await SensorMonitor.getProcessorTemps();
             cpuTemps.forEach((temperature, index) => {
-                if (oldCpuTemperatures[index] !== temperature) {
+                if (!oldCpuTemperatures[index] || oldCpuTemperatures[index] !== temperature) {
                     if (config.log) {
                         console.log('CPU Thread ' + index + ': ' + temperature)
                     }
@@ -33,7 +33,7 @@ client.on('connect', () => {
 
             let graphicTemperatures = await SensorMonitor.getGraphicTemperatures();
             graphicTemperatures.forEach((temperature, index) => {
-                if (oldGraphiCardTempeatures[index] !== temperature) {
+                if (!oldGraphiCardTempeatures[index] || oldGraphiCardTempeatures[index] !== temperature) {
                     if (config.log) {
                         console.log('Graphic card ' + index + ': ' + temperature);
                     }
